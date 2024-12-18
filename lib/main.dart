@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:core';
 import 'package:url_launcher/url_launcher.dart'; // 添加這行導入
 
 void main() {
@@ -94,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Text(
-                  '喜歡做點有趣的App工程師!?',
+                  '喜歡做點有趣App的App工程師!?',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 16,
