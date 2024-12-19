@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:core';
-import 'package:url_launcher/url_launcher.dart'; // 添加這行導入
+import 'package:url_launcher/url_launcher.dart'; // 加上url_launcher.dart 才有辦法開啟網頁
+import 'package:google_fonts/google_fonts.dart'; // 加上google_font的package
 
 void main() {
   runApp(const MyApp());
@@ -16,10 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'About Dawei',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: const TextTheme(
-            titleLarge: TextStyle(
-          fontWeight: FontWeight.bold,
-        )),
+        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.transparent),
         useMaterial3: true,
       ),
@@ -48,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.symmetric(vertical: 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -66,8 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
+                // 在子類別裡面把照片裁成圓形
                 child: ClipOval(
                   child: Image.asset(
+                    // 顯示我的大頭照
                     'assets/profile.jpg',
                     width: 200,
                     height: 200,
@@ -75,7 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+              // 加上SizedBox
               const SizedBox(height: 20),
+              // 加上文字
               const Text(
                 'Dawei',
                 style: TextStyle(
@@ -83,6 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+
+              // 加上SizedBox
               const SizedBox(height: 10),
               const Text(
                 '軟體工程師',
@@ -91,7 +94,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.grey,
                 ),
               ),
+
+              // 加上SizedBox
               const SizedBox(height: 15),
+
+              // 客製化 Padding
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Text(
@@ -103,6 +110,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+
+              // 顯示Rich Text
               RichText(
                 textAlign: TextAlign.left,
                 text: const TextSpan(
@@ -127,21 +136,28 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
+
+              // 加上SizedBox
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // 顯示我個人網頁的icon
                   IconButton(
-                    icon: const Icon(Icons.link),
+                    icon: const Icon(Icons.public),
                     onPressed: () {
+                      // Call show portfoilo
                       showMyPortfoilo();
                     },
                   ),
                   const SizedBox(width: 20),
+                  // 顯示我個人GitHub的icon
                   IconButton(
-                    icon: const Icon(Icons.code),
-                    onPressed: () => showGitHub(),
-                  ),
+                      icon: const Icon(Icons.terminal),
+                      onPressed: () {
+                        // Call show GitHub function
+                        showGitHub();
+                      }),
                 ],
               ),
             ],
@@ -154,7 +170,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // 顯示我的GitHub網站：
 void showGitHub() async {
-  // 添加 async
   final Uri gitHub = Uri.parse("https://github.com/dwhao84"); // 使用 Uri
   if (await canLaunchUrl(gitHub)) {
     await launchUrl(gitHub);
